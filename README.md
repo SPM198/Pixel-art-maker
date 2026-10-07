@@ -23,9 +23,3 @@ Este proyecto fue desarrollado como una herramienta creativa minimalista y funci
 - **JavaScript (ES6+):** Lógica del lienzo, manipulación del DOM, gestión de estados y control de capas.
 
 ---
-
-## Uso Local (Si deseas probarlo en tu máquina)
-
-1. Clona este repositorio:
-   ```bash
-   git clone [https://github.com/SPM198/nombre-de-tu-repo.git](https://github.com/SPM198/nombre-de-tu-repo.git)
