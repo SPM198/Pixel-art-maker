@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- BARRA SUPERIOR -->
+        <header class="top-bar">
+            <div class="logo-area">
+                <span class="logo">PIXl</span>
+                <span class="filename">my-sprite.png</span>
+            </div>
+
+            <div class="top-controls">
+                <button id="undoBtn" class="icon-btn" title="Deshacer (Ctrl + Z)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+                </button>
+                <button id="redoBtn" class="icon-btn" title="Rehacer (Ctrl + Y)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
+                </button>
+
+                <button id="themeToggleBtn" class="icon-btn" title="Cambiar Tema (Oscuro / Claro)">
+                   <!-- Modo claro / oscuro -->
+                    <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                
+                <div class="divider"></div>
+
+                <div class="size-selector-group">
+                    <label for="sizeSelect">Cuadrícula:</label>
+                    <select id="sizeSelect">
+                        <option value="16">16 x 16</option>
+                        <option value="32" selected>32 x 32</option>
+                        <option value="48">48 x 48</option>
+                        <option value="64">64 x 64</option>
+                    </select>
+                </div>
+
+                <!-- Selector de grosor del pincel -->
+                <div class="size-selector-group">
+                    <label for="brushSizeSelect">Pincel:</label>
+                    <select id="brushSizeSelect">
+                        <option value="1" selected>1 px</option>
+                        <option value="2">2 px</option>
+                        <option value="3">3 px</option>
+                    </select>
+                </div>
+
+                <button id="clearBtn" class="action-btn-secondary">Limpiar</button>
+                <button id="exportBtn" class="export-btn">Exportar</button>
+        </header>
+
+        <!-- Lienzo -->
+        <div class="workspace">
+            
+            <!-- SUSTITUYE TODA LA BARRA LATERAL IZQUIERDA POR ESTA -->
+            <aside class="left-sidebar">
+                <button id="brushBtn" class="tool-btn active" title="Pincel (B)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                </button>
+                <button id="eraserBtn" class="tool-btn" title="Borrador (E)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
+                </button>
+                <button id="bucketBtn" class="tool-btn" title="Cubeta de Pintura (G)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/><path d="m5 2 5 5"/><path d="M2 22h20"/></svg>
+                </button>
+                <button id="eyedropperBtn" class="tool-btn" title="Gotero (I)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3-3 3 3-3 3-3-3Z"/><path d="m17 8 2 2"/></svg>
+                </button>
+                
+                <div class="tool-divider"></div>
+
+                <button id="mirrorBtn" class="tool-btn" title="Modo Espejo Horizontal (M)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M18 6l-4 4 4 4"/><path d="M6 6l4 4-4 4"/></svg>
+                </button>
+            </aside>
+
+            <!-- LIENZO CENTRAL -->
+            <main class="canvas-area">
+                <div id="grid" class="grid"></div>
+            </main>
+
+            <!-- PANEL DERECHO (Colores, Paleta y Capas) -->
+            <aside class="right-sidebar">
+                <div class="panel-section">
+                    <h3>COLOR</h3>
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="colorPicker" value="#3498db">
+                        <span class="color-hex">#3498DB</span>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>PALETA</h3>
+                    <div class="palette" id="palette"></div>
+                </div>
+
+                <!-- Panel de Capas -->
+                <div class="panel-section">
+                    <div class="layers-header">
+                        <h3>CAPAS</h3>
+                        <button id="addLayerBtn" class="icon-btn-small" title="Añadir Capa">+</button>
+                    </div>
+                    <div class="layers-list" id="layersList"></div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
